@@ -2,16 +2,16 @@
   "name": "wa-reservation-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
     "build": "tsc",
-    "start": "node src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "bot": "ts-node-dev --respawn --transpile-only src/bot/bot.ts",
+    "test:gemini": "ts-node-dev --transpile-only src/helper/testGemini.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "devDependencies": {
     "@types/express": "^5.0.5",
     "@types/node": "^24.10.1",
@@ -20,7 +20,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
+    "@google/genai": "^1.29.1",
     "dotenv": "^17.2.3",
     "express": "^5.1.0"
   }
