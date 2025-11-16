@@ -249,13 +249,7 @@ Body:
 ```json
 {
   "conversationId": "test-ai",
-  "reply": "✅ Your reservation is confirmed!
-  Reservation ID: res_2025_66b6c4p6
-  - Name: Rahaf
-  - Date: 2025-11-17
-  - Time: 14:00
-  - Guests: 5
-  What would you like to do next?"
+  "reply": "✅ Your reservation is confirmed! Reservation ID: res_2025_66b6c4p6 - Name: Rahaf - Date: 2025-11-17 - Time: 14:00 - Guests: 5 What would you like to do next?"
 }
 ```
 
