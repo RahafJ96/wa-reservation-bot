@@ -1,4 +1,4 @@
-import { Reservation, ReservationStatus } from '../types/reservation';
+import { Reservation, ReservationStatus } from '../types/reservation-types';
 
 const reservations = new Map<string, Reservation>();
 

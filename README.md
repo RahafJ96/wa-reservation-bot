@@ -1,11 +1,35 @@
 # 🍽️ Restaurant Reservation Bot
 
+A Node.js + TypeScript chatbot system for managing restaurant reservations.
+The bot can create, modify, and cancel reservations through a conversational interface, powered by a Natural Language Understanding engine (Gemini API).
+
+This project demonstrates backend design, API structure, conversational logic, validation, and clean architecture.
+
 ## 🚀 Features
+
+### 🤖 Chatbot Features
+
+- Detects user requests:
+
+  - New reservation
+  - Modify reservation
+  - Cancel reservation
+  - Confirm reservation
+
+- Extracts structured data (date, time, guests, name)
+
+- Understands user messages using Gemini AI
+
+- Handles multi-step conversations with memory (conversationId)
+
+- Validates user input with clear error messages
+
+- Supports multiple sessions simultaneously
 
 ### 📦 API Features
 
 - Fully functional REST API for reservations
-- CRUD operations via:
+- **CRUD** operations via:
 
   - `POST /api/reservations`
   - `GET /api/reservations/:id`
@@ -18,21 +42,27 @@
 ## 🏗️ Architecture Overview
 
 ```graphql
-src/
+.
+├── public/
+│   └── index.html                   # User interface
 │
-├── api/
-│   ├── reservationRoutes.ts      # REST API for reservation CRUD (/api/reservations)
-│   ├── validation.ts             # Validation for user input (time-24h, date-type-YYYY-MM-DD, guests)
-│   └── reservationStore.ts       # In-memory reservation “database”
-│
-├── bot/
-│
-├── helper/
-│
-├── types/
-│   └── reservations.ts           # Types of the reservations params
-│
-└── server.ts                      # Applcation entry point
+├── src/
+│   │
+│   ├── api/
+│   │   ├── reservationRoutes.ts     # REST API for reservation CRUD (/api/reservations)
+│   │   ├── chatRoutes.ts            # Chat endpoint (POST /api/chat)
+│   │   ├── validation.ts            # Validation for user input (24-hour time, YYYY-MM-DD date, guests)
+│   │   └── reservationStore.ts      # In-memory reservation “database”
+│   │
+│   ├── bot/
+│   │   └── conversationManager.ts   # Conversation flow integration
+│   │
+│   ├── helper/
+│   │
+│   ├── types/
+│   │   └── reservations.ts          # Reservation type definitions
+│   │
+│   └── server.ts                    # Application entry point
 
 ```
 
@@ -181,3 +211,13 @@ Output:
   }
 }
 ```
+
+## 🛠️ Tech Stack
+
+- **Node.js + Express**
+
+- **TypeScript**
+
+- **Gemini AI API**
+
+- **dotenv** for environment configuration
