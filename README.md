@@ -10,7 +10,6 @@ This project demonstrates backend design, API structure, conversational logic, v
 ### 🤖 Chatbot Features
 
 - Detects user requests:
-
   - New reservation
   - Modify reservation
   - Cancel reservation
@@ -58,6 +57,8 @@ This project demonstrates backend design, API structure, conversational logic, v
 │   │   └── conversationManager.ts   # Conversation flow integration
 │   │
 │   ├── helper/
+│   │   ├── gemini-start.ts          # Gemini module
+│   │   └── gemini-test.ts           # Manual test script
 │   │
 │   ├── types/
 │   │   └── reservations.ts          # Reservation type definitions
@@ -209,6 +210,81 @@ Output:
     "createdAt": "2025-11-15T10:50:25.765Z",
     "updatedAt": "2025-11-15T10:53:02.217Z"
   }
+}
+```
+
+## 🤖🧪 Testing the Chatbot API
+
+### Testing with Postman - `api/chat`
+
+```bash
+POST /api/reservations/api/chat
+```
+
+Body:
+
+```json
+{
+  "conversationId": "test-ai",
+  "message": " I want to book a table tomorrow at 2pm for 5 people under the name Rahaf"
+}
+```
+
+**Output:**
+
+```json
+{
+  "conversationId": "test-ai",
+  "reply": "Please confirm your reservation:
+  - Name: Rahaf
+  - Date: 2025-11-17
+  - Time: 14:00
+  - Guests: 5
+  Reply 'yes' to confirm or 'no' to cancel."
+}
+```
+
+**After the Confirmation:**
+
+```json
+{
+  "conversationId": "test-ai",
+  "reply": "✅ Your reservation is confirmed!
+  Reservation ID: res_2025_66b6c4p6
+  - Name: Rahaf
+  - Date: 2025-11-17
+  - Time: 14:00
+  - Guests: 5
+  What would you like to do next?"
+}
+```
+
+---
+
+**📌 To run the script:**
+
+```bash
+npm run test:gemini
+```
+
+**Output:**
+
+User message:
+
+```css
+I want to book a table after two days from today at 4pm for 2 people under the name Rahaf
+```
+
+Helper result from Gemini:
+
+```json
+{
+  "intent": "new_reservation",
+  "date": "2025-11-18",
+  "time": "16:00",
+  "guests": 2,
+  "name": "Rahaf",
+  "notes": "User wants to book a new reservation for two days from today at 4 PM for 2 people under the name Rahaf."
 }
 ```
 

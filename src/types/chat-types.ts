@@ -23,6 +23,7 @@ export interface ConversationState {
   step: ConversationStep;
   lastAction: LastAction;
   draft: ReservationDraft;
+  lastReservationId?: string;
 }
 export interface HELPResult {
   intent:

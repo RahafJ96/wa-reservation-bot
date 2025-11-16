@@ -9,7 +9,6 @@ const router = Router();
  */
 router.post('/', async (req, res) => {
   const { conversationId, message } = req.body;
-  console.log(conversationId, message, 'conversationId, message ');
 
   if (!message) {
     return res.status(400).json({ error: "Missing 'message' in request body" });

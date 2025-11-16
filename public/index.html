@@ -39,20 +39,10 @@
 
     .app-shell {
       width: 100%;
-      max-width: 960px;
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
-      gap: 18px;
+      max-width: 720px;
     }
 
-    @media (max-width: 820px) {
-      .app-shell {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .chat-card,
-    .side-card {
+    .chat-card {
       background: var(--card-bg);
       border-radius: 26px;
       border: 1px solid var(--border-soft);
@@ -62,8 +52,7 @@
       overflow: hidden;
     }
 
-    .chat-card::before,
-    .side-card::before {
+    .chat-card::before {
       content: "";
       position: absolute;
       inset: -40%;
@@ -72,8 +61,7 @@
       pointer-events: none;
     }
 
-    .chat-card-inner,
-    .side-card-inner {
+    .chat-card-inner {
       position: relative;
       z-index: 1;
       padding: 18px 18px 16px;
@@ -82,7 +70,6 @@
       flex-direction: column;
     }
 
-    /* Header */
     .chat-header {
       display: flex;
       align-items: center;
@@ -141,7 +128,6 @@
       border: 1px solid rgba(148, 163, 184, 0.3);
     }
 
-    /* Messages */
     .chat-messages {
       flex: 1;
       min-height: 260px;
@@ -182,6 +168,7 @@
     }
 
     .msg-bubble {
+      white-space: pre-wrap;
       max-width: 78%;
       padding: 8px 11px;
       border-radius: var(--radius-xl);
@@ -204,29 +191,6 @@
       font-weight: 500;
     }
 
-    .msg-meta {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      color: #9ca3af;
-      margin-top: 2px;
-    }
-
-    .msg-meta span:nth-child(2) {
-      opacity: 0.7;
-    }
-
-    .msg-badge {
-      font-size: 0.66rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-    }
-
-    /* Typing indicator */
     .typing {
       display: inline-flex;
       align-items: center;
@@ -258,7 +222,6 @@
       50% { transform: translateY(-2px); opacity: 1; }
     }
 
-    /* Input area */
     .chat-input-row {
       margin-top: 10px;
       border-radius: 999px;
@@ -273,12 +236,6 @@
     .chat-input-row:focus-within {
       border-color: var(--accent);
       box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.6);
-    }
-
-    .prompt-hint {
-      font-size: 0.7rem;
-      color: #9ca3af;
-      margin-bottom: 4px;
     }
 
     .chat-input {
@@ -331,93 +288,10 @@
     .send-btn-icon {
       font-size: 0.9rem;
     }
-
-    /* Side card */
-    .side-card-inner h3 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .side-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      border: 1px solid rgba(251, 191, 36, 0.35);
-      color: #fef3c7;
-      margin-bottom: 8px;
-    }
-
-    .side-list {
-      list-style: none;
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .side-list li::before {
-      content: "•";
-      margin-right: 6px;
-      color: var(--accent);
-    }
-
-    .side-footer {
-      margin-top: auto;
-      font-size: 0.75rem;
-      color: #9ca3af;
-      border-top: 1px dashed rgba(148, 163, 184, 0.6);
-      padding-top: 8px;
-    }
-
-    .pill {
-      display: inline-flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .pill span {
-      font-size: 0.72rem;
-      padding: 4px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      color: #e5e7eb;
-    }
-
-    .badge-ai {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(56, 189, 248, 0.6);
-      color: #bae6fd;
-      background: rgba(15, 118, 110, 0.2);
-    }
-
-    .tiny {
-      font-size: 0.7rem;
-    }
-
-    .linkish {
-      color: #93c5fd;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      cursor: default;
-    }
   </style>
 </head>
 <body>
   <div class="app-shell">
-    <!-- Chat card -->
     <section class="chat-card">
       <div class="chat-card-inner">
         <header class="chat-header">
@@ -436,10 +310,6 @@
           </div>
         </header>
 
-        <div class="prompt-hint">
-          Try: <span class="linkish">“Book a table tomorrow at 7pm for 2 people under the name Rahaf”</span>
-        </div>
-
         <main class="chat-messages" id="chatMessages"></main>
 
         <div class="chat-input-row">
@@ -457,54 +327,14 @@
         </div>
       </div>
     </section>
-
-    <!-- Side info card -->
-    <aside class="side-card">
-      <div class="side-card-inner">
-        <h3>How this bot works</h3>
-        <div class="side-chip">
-          <span>✨</span>
-          <span>Natural language to structured reservation</span>
-        </div>
-        <ul class="side-list">
-          <li>Understands your intent (new / modify / cancel).</li>
-          <li>Extracts date, time, guests, and name.</li>
-          <li>Validates input and handles errors gracefully.</li>
-          <li>Stores reservations in an in-memory backend API.</li>
-        </ul>
-
-        <div class="tiny">
-          <span class="badge-ai">NLU Engine</span>
-          <p style="margin-top: 6px;">
-            The backend uses a dedicated NLU helper to transform free-text into a structured
-            reservation payload, which is then passed to the Reservation API.
-          </p>
-        </div>
-
-        <div class="side-footer">
-          <div>Quick examples you can try:</div>
-          <div class="pill">
-            <span>“New reservation”</span>
-            <span>“Change my time to 9pm”</span>
-            <span>“Cancel my booking”</span>
-          </div>
-          <div style="margin-top: 8px;">
-            All conversations are grouped by a generated <code>conversationId</code> shown at the top.
-          </div>
-        </div>
-      </div>
-    </aside>
   </div>
 
   <script>
-    // --- Simple client-side chat logic ---
-
     const messagesEl = document.getElementById("chatMessages");
     const inputEl = document.getElementById("chatInput");
     const sendBtn = document.getElementById("sendBtn");
     const convLabelEl = document.getElementById("conversationIdLabel");
 
-    // Generate a simple session id
     const conversationId = "web-" + Math.random().toString(36).slice(2, 8);
     convLabelEl.textContent = "session: " + conversationId;
 
@@ -549,9 +379,7 @@
 
     function removeTyping() {
       const row = document.getElementById("typing-row");
-      if (row) {
-        row.remove();
-      }
+      if (row) row.remove();
     }
 
     async function sendMessage() {
@@ -562,12 +390,11 @@
       inputEl.value = "";
       inputEl.focus();
 
-      // Call backend
       sendBtn.disabled = true;
       appendTyping();
 
       try {
-        const res = await fetch("/api/chat", {
+        const res = await fetch("http://localhost:3000/api/chat", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -592,7 +419,7 @@
           appendMessage({ from: "bot", text: data.reply });
         }
       } catch (err) {
-        console.error(err);        
+        console.error(err);
         removeTyping();
         appendMessage({
           from: "bot",
@@ -604,7 +431,6 @@
     }
 
     sendBtn.addEventListener("click", sendMessage);
-
     inputEl.addEventListener("keydown", (e) => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
@@ -612,7 +438,6 @@
       }
     });
 
-    // Seed initial bot welcome message
     appendMessage({
       from: "bot",
       text: "Hello! I’m your reservation assistant. How can I help you today? 😊",

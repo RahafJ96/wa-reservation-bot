@@ -45,9 +45,14 @@ export function updateReservation(
   updates: Partial<
     Pick<Reservation, 'name' | 'date' | 'time' | 'guests' | 'status'>
   >
-): Reservation | null {
+): Reservation | undefined {
   const existing = reservations.get(id);
-  if (!existing) return null;
+  if (!existing) return undefined;
+
+  // Not allowing the canceled Reservation be updated
+  if (existing.status === ReservationStatus.CANCELLED) {
+    return existing;
+  }
 
   const updated: Reservation = {
     ...existing,
